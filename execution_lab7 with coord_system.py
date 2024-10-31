@@ -1,17 +1,19 @@
+from math import ceil
+
 import matplotlib.pyplot as plt
 
 #   Исходные данные размещения столов
-table_length = 7.2
-table_width = 0.8
-table_distance = 2
-table_sum = 8
+tables_row_length = 7.2 # 6 столов соединены в ряд
+table_width = 0.8 # ширина столов (рядов)
+table_distance = 2 # расстояние между рядами
+tables_row_sum = 8 # количество рядов столов
 edge_x = 20.4
 edge_y = 7.2
 mid_x = 10.2
 mid_y = 3.6
 
 #   Перечень координат предполагаемого расположения точки раздачи
-distrib_coords = [(0, 0), (0, 3.6), (10.2, 0), (10.2, 3.6)]
+distrib_coords = [(0, 0), (10.2, 0), (10.2, 3.6)]
 
 #   Перебор всех координат сидячих мест по оси X
 coords_x = [0]
@@ -158,3 +160,14 @@ for j in range(len(value_list)):
     if cluster != []:
         print(f"Состав {c}-го кластера: ", cluster)
         c += 1
+
+
+# Определение количества смен, необходимых на потребление пищи всеми обучающимися
+number_of_students = (4 * 9 + 2 * 2) * 25 # количество учеников в школе
+NOS_per_row = 25 # количество учеников на одном ряду столов
+NOS_in_dining_room = NOS_per_row * 8 # максимальное количество учеников в столовой
+meal_time = 20 # время на обеденный перерыв для класса
+break_time = 40 # время перерыва
+number_of_shifts = ceil((number_of_students//NOS_in_dining_room)
+                        /(break_time//meal_time)) # количество смен на потребление пищи всеми обучающимися
+print("Количество смен:", number_of_shifts)
